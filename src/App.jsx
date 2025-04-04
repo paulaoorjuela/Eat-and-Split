@@ -1,3 +1,6 @@
+import Button from "./Button";
+import FormAddFriend from "./FormAddFriend";
+import FormSplitBill from "./FormSplitBill";
 import FriendsList from "./FriendsList";
 
 const initialFriends = [
@@ -27,7 +30,10 @@ export default function App() {
       {/* <h1>Eat 'N Split</h1> */}
       <div className="sidebar">
         <FriendsList initialFriends={initialFriends}/>
+        <FormAddFriend />
+        <Button>Add friend</Button>
       </div>
+      <FormSplitBill />
     </div>
     
   )
