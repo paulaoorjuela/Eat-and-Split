@@ -40,7 +40,9 @@ export default function App() {
   }
 
   function handleSelectFriend(friend){
-    setSelectedFriend(friend);
+    // setSelectedFriend(friend);
+    setSelectedFriend(selected => selected?.id === friend.id ? null : friend);
+    setShowAddFriend(false);
   }
 
   return(
