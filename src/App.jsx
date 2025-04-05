@@ -45,6 +45,13 @@ export default function App() {
     setShowAddFriend(false);
   }
 
+  function handleSplitBill(value){
+    console.log(value)
+    setFriends(friends => 
+      friends.map(friend => 
+        friend.id === selectedFriend.id ? {...friend, balance: friend.balance + value} : friend))
+  }
+
   return(
     <div className="app">
       {/* <h1>Eat 'N Split</h1> */}
@@ -55,7 +62,7 @@ export default function App() {
 
         <Button onClick={handleShowAddFriend}>{showAddFriend? 'Close' : 'Add friend'}</Button>
       </div>
-      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend}/>}
+      {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} onSplitBill={handleSplitBill}/>}
     </div>
     
   )
