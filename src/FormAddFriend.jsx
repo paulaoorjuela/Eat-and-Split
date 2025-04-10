@@ -27,7 +27,7 @@ export default function FormAddFriend({ onAddFriend }) {
 
             <label htmlFor="image">image URL</label>
             <input type="text" id="image" value={image} onChange={(e) => {setImage(e.target.value)}}/>
-            <Button>Add friend</Button>
+            <Button color="primary">Add friend</Button>
 
         </form>
     )

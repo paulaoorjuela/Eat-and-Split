@@ -60,6 +60,14 @@ export default function App() {
     setShowAddFriend(false);
   }
 
+  function handleDeleteFriend(id) {
+    setFriends(friends => friends.filter(friend => friend.id !== id));
+    // Clear selection if deleted friend was selected
+    if (selectedFriend?.id === id) {
+        setSelectedFriend(null);
+    }
+}
+
   function handleSplitBill(value){
     console.log(value)
     setFriends(friends => 
@@ -68,18 +76,24 @@ export default function App() {
   }
 
   return(
+    <>
+    <h1 className="page-title">Eat 'N Split</h1>
     <div className="app">
-      {/* <h1>Eat 'N Split</h1> */}
       <div className="sidebar">
-        <FriendsList friends={friends} onSelectFriend={handleSelectFriend} selectedFriend={selectedFriend}/>
+        <FriendsList 
+          friends={friends} 
+          onSelectFriend={handleSelectFriend} 
+          selectedFriend={selectedFriend} 
+          onDeleteFriend={handleDeleteFriend}
+        />
 
         {showAddFriend && <FormAddFriend onAddFriend={handleAddFriend} />}
 
-        <Button onClick={handleShowAddFriend}>{showAddFriend? 'Close' : 'Add friend'}</Button>
+        <Button onClick={handleShowAddFriend}>{showAddFriend? 'Close' : 'Add friend ➕'}</Button>
       </div>
       {selectedFriend && <FormSplitBill selectedFriend={selectedFriend} onSplitBill={handleSplitBill}/>}
     </div>
-    
+    </>
   )
 
 }
