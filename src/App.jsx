@@ -1,34 +1,49 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "./Button";
 import FormAddFriend from "./FormAddFriend";
 import FormSplitBill from "./FormSplitBill";
 import FriendsList from "./FriendsList";
 
-const initialFriends = [
-  {
-    id: 118836,
-    name: "Clark",
-    image: "https://i.pravatar.cc/48?u=118836",
-    balance: -7,
-  },
-  {
-    id: 933372,
-    name: "Sarah",
-    image: "https://i.pravatar.cc/48?u=933372",
-    balance: 20,
-  },
-  {
-    id: 499476,
-    name: "Anthony",
-    image: "https://i.pravatar.cc/48?u=499476",
-    balance: 0,
-  },
-];
+// Initialize state from localStorage
+const initialFriends = () => {
+  try {
+    const stored = localStorage.getItem("friends");
+    return stored ? JSON.parse(stored) : [];
+  } catch {
+    return [];
+  }
+};
+
+// const initialFriends = [
+//   {
+//     id: 118836,
+//     name: "Clark",
+//     image: "https://i.pravatar.cc/48?u=118836",
+//     balance: -7,
+//   },
+//   {
+//     id: 933372,
+//     name: "Sarah",
+//     image: "https://i.pravatar.cc/48?u=933372",
+//     balance: 20,
+//   },
+//   {
+//     id: 499476,
+//     name: "Anthony",
+//     image: "https://i.pravatar.cc/48?u=499476",
+//     balance: 0,
+//   },
+// ];
 
 export default function App() {
   const [showAddFriend, setShowAddFriend] = useState(false);
   const [friends, setFriends] = useState(initialFriends);
   const [selectedFriend, setSelectedFriend] = useState(null);
+
+  // Save to localStorage whenever friends change
+  useEffect(() => {
+    localStorage.setItem("friends", JSON.stringify(friends));
+  }, [friends]);
 
   function handleShowAddFriend(){
     setShowAddFriend((prev) => !prev); // Toggle the state
